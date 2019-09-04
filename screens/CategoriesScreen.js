@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -14,7 +14,25 @@ import CategoryGridTile from "../components/CategoryGridTile";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 
+
+
+
+
+
 const CategoriesScreen = props => {
+
+  const [CAT, setCAT] = useState(CATEGORIES);
+
+  useEffect(() => {
+    function shuffle(array) {
+      array.sort(() => Math.random() - 0.5);
+    }
+    shuffle(CATEGORIES)
+    //console.log(CATEGORIES[0]);    
+    setCAT(CATEGORIES)
+    console.log(CAT);
+    
+  })
   const renderGridItem = itemData => {
     return (
       <CategoryGridTile
@@ -35,7 +53,7 @@ const CategoriesScreen = props => {
   return (
     <FlatList
       keyExtractor={(item, index) => item.id}
-      data={CATEGORIES}
+      data={CAT}
       renderItem={renderGridItem}
       numColumns={2}
     />
